@@ -1,4 +1,4 @@
-module testbench;
+module testbench_PC;
 
 
     // ================================================
@@ -58,6 +58,53 @@ module testbench;
     initial begin
         $dumpfile("pc_tb.vcd");
         $dumpvars(0, testbench);
+    end
+
+endmodule
+
+
+
+module testbench_imem;
+
+    reg [31:0] addr;
+    wire [31:0] instruction;
+
+    // Instancia del módulo IMEM
+    IMEM dut (
+        .addr(addr),
+        .instruction(instruction)
+    );
+
+    integer i;
+
+
+
+    initial begin
+        $display("Addr   | Instruction         | Opcode | rs | rt | rd | shamt | funct | immediate");
+        $display("-------------------------------------------------------------------------------");
+        for (i = 0; i < 10; i = i + 1) begin
+            addr = i;
+            #1; // Espera a que instruction se actualice
+
+            // Extrae campos para tipo R
+            $display("%2d     | %h | %2b     | %2d | %2d | %2d | %2d    | %2d    | %h",
+                addr,
+                instruction,
+                instruction[31:26], // opcode
+                instruction[25:21], // rs
+                instruction[20:16], // rt
+                instruction[15:11], // rd
+                instruction[10:6],  // shamt
+                instruction[5:0],   // funct
+                instruction[15:0]   // immediate
+            );
+        end
+        $finish;
+    end
+
+    initial begin
+        $dumpfile("imem_tb.vcd");
+        $dumpvars(0, testbench_imem);
     end
 
 endmodule
