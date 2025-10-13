@@ -85,7 +85,7 @@ module testbench_imem;
     initial begin
         $display("Addr   | Instruction         | Opcode | rs | rt | rd | shamt | funct | immediate");
      
-        for (i = 0; i < 10; i = i + 1) begin
+        for (i = 0; i < 12; i = i + 1) begin
             addr = i;
             #1; // Espera a que instruction se actualice
 
@@ -152,9 +152,9 @@ module testbench_PC_IMEM;
         reset = 0;
 
         // Avanza el PC automáticamente y muestra instrucción y campos
-        for (i = 0; i < 10; i = i + 1) begin
+        for (i = 0; i < 12; i = i + 1) begin
             @(posedge clk);
-            next_pc = current_pc + 1; // Avanza de 4 en 4 (tamaño típico de instrucción MIPS)
+            next_pc = current_pc + 1; 
 
             $display("PC=%0d, Instr=%b", current_pc, instruction);
             $display("opcode=%b rs=%b rt=%b rd=%b shamt=%b funct=%b immediate=%b",
