@@ -65,6 +65,8 @@ endmodule
 
 
 
+
+
 module testbench_imem;
 
     reg [31:0] addr;
@@ -82,7 +84,7 @@ module testbench_imem;
 
     initial begin
         $display("Addr   | Instruction         | Opcode | rs | rt | rd | shamt | funct | immediate");
-        $display("-------------------------------------------------------------------------------");
+     
         for (i = 0; i < 10; i = i + 1) begin
             addr = i;
             #1; // Espera a que instruction se actualice

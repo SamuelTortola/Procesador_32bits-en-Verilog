@@ -24,7 +24,7 @@ module IMEM(
         memory[7] = 32'b000000_00100_00101_00110_00000_100101; // OR $6, $4, $5
         memory[8] = 32'b000000_00101_00110_00111_00000_101010; // SLT $7, $5, $6
         memory[9] = 32'b000010_00000000000000000000001100;     // J 12
-        // Puedes inicializar el resto si lo deseas
+       
     end
 
     assign instruction = memory[addr[4:0]]; // Usa los 5 bits menos significativos
