@@ -1,6 +1,6 @@
 module testbench_PC;
 
-
+//**********************************************************************************************
 
     // ================================================
     // 1. DECLARACIÓN DE SEÑALES
@@ -65,7 +65,7 @@ endmodule
 
 
 
-
+//**********************************************************************************************
 
 module testbench_imem;
 
@@ -111,3 +111,73 @@ module testbench_imem;
     end
 
 endmodule
+
+
+//**********************************************************************************************
+
+module testbench_PC_IMEM;
+
+    reg clk;
+    reg reset;
+    reg [31:0] next_pc;
+    wire [31:0] current_pc;
+    wire [31:0] instruction;
+
+    // Instancia del PC
+    PC pc_inst (
+        .clk(clk),
+        .reset(reset),
+        .next_pc(next_pc),
+        .current_pc(current_pc)
+    );
+
+    // Instancia de IMEM
+    IMEM imem_inst (
+        .addr(current_pc),
+        .instruction(instruction)
+    );
+
+    integer i;
+
+    // Generación de reloj
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        reset = 1;
+        next_pc = 0;
+        #12;
+        reset = 0;
+
+        // Avanza el PC automáticamente y muestra instrucción y campos
+        for (i = 0; i < 10; i = i + 1) begin
+            @(posedge clk);
+            next_pc = current_pc + 1; // Avanza de 4 en 4 (tamaño típico de instrucción MIPS)
+
+            $display("PC=%0d, Instr=%b", current_pc, instruction);
+            $display("opcode=%b rs=%b rt=%b rd=%b shamt=%b funct=%b immediate=%b",
+                instruction[31:26], // opcode
+                instruction[25:21], // rs
+                instruction[20:16], // rt
+                instruction[15:11], // rd
+                instruction[10:6],  // shamt
+                instruction[5:0],   // funct
+                instruction[15:0]   // immediate
+            );
+            $display("");
+        end
+
+        $finish;
+    end
+
+    initial begin
+        $dumpfile("pc_imem_tb.vcd");
+        $dumpvars(0, testbench_PC_IMEM);
+    end
+
+endmodule
+
+
+//**********************************************************************************************
