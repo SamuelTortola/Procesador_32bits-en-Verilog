@@ -1,7 +1,6 @@
 // Program Counter (PC) Module
 // Universidad del Valle de Guatemala
 // Curso: Arquitectura de Computadores
-// Autor: Samuel Tortola - 22094, Alan Gomez - 22115
 // Fecha: 13/10/2025
 
 //El Program Counter (PC) es un registro especial en la CPU que almacena la dirección de la siguiente instrucción que debe ejecutarse.

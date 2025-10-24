@@ -1,7 +1,6 @@
 // IMEM
 // Universidad del Valle de Guatemala
 // Curso: Arquitectura de Computadores
-// Autor: Samuel Tortola - 22094, Alan Gomez - 22115
 // Fecha: 13/10/2025
 
 //El Instruction Memory (IMEM) es una memoria que almacena las instrucciones del programa que la CPU debe ejecutar.
@@ -36,4 +35,7 @@ module IMEM(
     assign instruction = memory[addr[4:0]]; // Usa los 5 bits menos significativos
 
 endmodule
+
+
+
 
