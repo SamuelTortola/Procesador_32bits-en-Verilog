@@ -1,4 +1,4 @@
-module testbench_PC;
+module testbench_ALU_control;
 
 
     // ================================================
@@ -68,7 +68,7 @@ module testbench_PC;
 
     initial begin
         $dumpfile("ALU_control.vcd");
-        $dumpvars(0, testbench_PC);
+        $dumpvars(0, testbench_ALU_control);
     end
 
 endmodule
