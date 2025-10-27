@@ -122,9 +122,6 @@ module testbench_banco;
         $display("");
 
 
-
-
-
         // Finalizar la simulación
         #20;
         $finish;
